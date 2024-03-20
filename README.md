@@ -1,8 +1,7 @@
-# DevCamp - Frontned Material 
+# DevCamp - Login, Signup, Payment
 
 The application code provided above is designed to create a user registration form with a two-step process using React, TypeScript, and various custom components. This document will explain the code step by step, highlighting the use of external libraries, custom com
  
-
 ## Tech Stacks
 
 The following technologies and libraries are used in this project:

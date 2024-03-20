@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Toaster />
       </div>
       {/* 테마 전환 버튼을 렌더링합니다. */}
-      <ModeToggle className={"absolute top-6 right-6"} />
+      <ModeToggle className={"absolute top-10 right-10"} />
     </ThemeProvider>
   );
 }
