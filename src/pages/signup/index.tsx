@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'; // Card 컴포넌트 및 관련 컴포넌트를 가져옵니다.
@@ -17,6 +17,7 @@ import { useState } from 'react'; // useState 훅을 가져옵니다.
 import { ArrowRight } from 'lucide-react'; // lucide-react 라이브러리에서 ArrowRight 아이콘을 가져옵니다.
 
 type RegisterInput = z.infer<typeof registerSchema>; // RegisterInput 유형을 선언하고 유효성 검사 스키마에서 추론합니다.
+export const BlankLine = () => <div className="border-b border-gray-300"></div>;
 
 // Home 함수는 앱의 홈 페이지를 렌더링하는 컴포넌트입니다.
 export default function Signup() {
@@ -169,6 +170,7 @@ export default function Signup() {
                                         </FormItem>
                                     )}
                                 />
+                                <BlankLine />
                                 {/* 역할 선택 필드 */}
                                 <FormField
                                     control={form.control}
