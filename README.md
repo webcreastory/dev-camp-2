@@ -17,6 +17,8 @@
 ![Signup_Page-002](https://github.com/webcreastory/dev-camp-2/assets/137463073/761a534c-f16b-4a7d-b29d-6f6ec2cadd16)
 ![유효성-검사-003](https://github.com/webcreastory/dev-camp-2/assets/137463073/1e5a25cf-b9fc-4357-ad23-10e4dd15a0fc)
 
+---
+
 ### Tech Stacks
 
 - `shadcn/ui`: 완성된 UI 컴포넌트를 활용하여 button, card, input 등의 기능을 구현하였습니다.
