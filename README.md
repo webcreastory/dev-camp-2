@@ -10,6 +10,8 @@
 - `이력서&포트폴리오 연동`: [중앙 로고] 개발을 진행한 이의 이력서와 포트폴리오를 확인해보실 수 있습니다.
 - `dark, Light, System모드`: [상단 우측 아이콘] 원하는 모드로 화면을 편안하게 확인하실 수 있습니다.
 
+---
+
 ## SINGUP & LOGIN
 
 ![Signup_Page-002](https://github.com/webcreastory/dev-camp-2/assets/137463073/761a534c-f16b-4a7d-b29d-6f6ec2cadd16)
@@ -27,8 +29,12 @@
 - `lucide-react`: 화살표 아이콘을 표시하기 위한 라이브러리로 사용되었습니다.
 - `react-icons`: 직선 아이콘을 표시하기 위한 라이브러리로 사용되었습니다.
 
+---
+
 ![LOGIN-003](https://github.com/webcreastory/dev-camp-2/assets/137463073/65b4f95f-f9cb-40c3-a45e-bb74f688068b)
 ![유효성-검사_LOGIN-004](https://github.com/webcreastory/dev-camp-2/assets/137463073/2e38381f-da21-4e2d-9d8c-070e6f894ef9)
+
+---
 
 ### Main Function
 
