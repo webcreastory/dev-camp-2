@@ -71,7 +71,7 @@ export default function Login() {
                         src="/home.png"
                         alt="Home Logo"
                         className="dark:invert"
-                        width={150}
+                        width={130}
                         height={24}
                         priority
                         onClick={handleHome}

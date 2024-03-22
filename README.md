@@ -14,7 +14,7 @@
 
 ## SINGUP & LOGIN
 
-![Signup_Page-002](https://github.com/webcreastory/dev-camp-2/assets/137463073/761a534c-f16b-4a7d-b29d-6f6ec2cadd16)
+![signup-003](https://github.com/webcreastory/dev-camp-2/assets/137463073/14922d9e-910f-4808-934d-c8d6c562356f)
 ![유효성-검사-003](https://github.com/webcreastory/dev-camp-2/assets/137463073/1e5a25cf-b9fc-4357-ad23-10e4dd15a0fc)
 
 ---
@@ -33,7 +33,7 @@
 
 ---
 
-![LOGIN-003](https://github.com/webcreastory/dev-camp-2/assets/137463073/65b4f95f-f9cb-40c3-a45e-bb74f688068b)
+![login-002](https://github.com/webcreastory/dev-camp-2/assets/137463073/67df3970-5a30-4f0d-a76b-8e33d5688afa)
 ![유효성-검사_LOGIN-004](https://github.com/webcreastory/dev-camp-2/assets/137463073/2e38381f-da21-4e2d-9d8c-070e6f894ef9)
 
 ---
