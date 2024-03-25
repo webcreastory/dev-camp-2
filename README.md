@@ -52,6 +52,9 @@
 
 ---
 
+![login-002](https://github.com/webcreastory/dev-camp-2/assets/137463073/67df3970-5a30-4f0d-a76b-8e33d5688afa)
+![유효성-검사_LOGIN-004](https://github.com/webcreastory/dev-camp-2/assets/137463073/2e38381f-da21-4e2d-9d8c-070e6f894ef9)
+
 ### Tech Stacks
 
 -   `shadcn/ui`: 완성된 UI 컴포넌트를 활용하여 button, card, input 등의 기능을 간편하게 구현하였습니다.
@@ -63,10 +66,5 @@
 -   `framer-motion`: 입력한 input 내용이 애니메이션으로 전환되는 효과를 위해 사용되었습니다.
 -   `lucide-react`: 화살표 아이콘을 표시하기 위해 사용되었습니다.
 -   `react-icons`: 직선 아이콘을 표시하기 위해 사용되었습니다.
-
----
-
-![login-002](https://github.com/webcreastory/dev-camp-2/assets/137463073/67df3970-5a30-4f0d-a76b-8e33d5688afa)
-![유효성-검사_LOGIN-004](https://github.com/webcreastory/dev-camp-2/assets/137463073/2e38381f-da21-4e2d-9d8c-070e6f894ef9)
 
 ---
