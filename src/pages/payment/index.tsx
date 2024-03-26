@@ -14,12 +14,10 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Bold, Italic, Underline } from 'lucide-react';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { useToast } from '@/components/ui/use-toast'; // useToast 훅을 가져옵니다.
 import { motion } from 'framer-motion'; // framer-motion 라이브러리의 motion 모듈을 가져옵니다.
@@ -31,6 +29,7 @@ import { registerSchema } from '@/validators/auth'; // 인증 유효성 검사�
 import { z } from 'zod'; // zod 라이브러리를 가져옵니다.
 import { useState } from 'react'; // useState 훅을 가져옵니다.
 import { ArrowRight } from 'lucide-react'; // lucide-react 라이브러리에서 ArrowRight 아이콘을 가져옵니다.
+import ProductsPage from './products';
 
 type RegisterInput = z.infer<typeof registerSchema>; // RegisterInput 유형을 선언하고 유효성 검사 스키마에서 추론합니다.
 export const BlankLine = () => <div className="border-b border-gray-300"></div>;
@@ -48,8 +47,6 @@ export default function Payment() {
             email: '',
             role: '',
             username: '',
-            password: '',
-            confirmPassword: '',
         },
     });
 
@@ -81,24 +78,25 @@ export default function Payment() {
         router.push('/login');
     };
 
-    const invoices = [
-        {
-            invoice: '상품가격',
-            totalAmount: '18,000원',
-        },
-        {
-            invoice: '쿠폰할인',
-            totalAmount: '-1,000원',
-        },
-        {
-            invoice: '포인트 사용',
-            totalAmount: '0원',
-        },
-        {
-            invoice: '배송비',
-            totalAmount: '+2,000원',
-        },
-    ];
+    const product = {
+        img: '/payment-image.jpg',
+        condition: '필수',
+        title: 'Daily Facial Soap',
+        content: '용량 80ml - 1개',
+        price: '7,000원',
+    };
+
+    // Mock 데이터 형태 정의
+    interface CouponData {
+        title: string;
+        price: string;
+    }
+
+    // Mock 데이터
+    const coupon: CouponData = {
+        title: '신규',
+        price: '5,000원',
+    };
 
     return (
         // 카드 레이아웃을 생성하고 폼을 렌더링합니다.
@@ -123,30 +121,14 @@ export default function Payment() {
                     <ArrowRight className="w-4 h-4 ml-2" />
                 </p>
             </div>
+
             <div className="z-10 max-w-5xl w-full items-center justify-between lg:flex">
                 <div className="z-10 max-w-5xl w-full items-center justify-between">
                     <Card className={cn('w-[500px] mb-5 mt-5')}>
                         <CardHeader>
                             <CardTitle>주문 상품 정보</CardTitle>
-                            <div className="flex w-full justify-start">
-                                <Image
-                                    src="/payment-image.jpg"
-                                    alt="payment image"
-                                    className="dark:invert mt-3"
-                                    width={100}
-                                    height={100}
-                                    priority
-                                />
-                                <div className="pl-3 mt-3">
-                                    <Badge className="mb-1" variant="destructive">
-                                        필수
-                                    </Badge>
-                                    <CardDescription className="p-1 font-bold">Daily Facial Soap</CardDescription>
-                                    <CardDescription className="p-1">용량 80ml - 1개</CardDescription>
-                                    <CardDescription className="p-1">18,000</CardDescription>
-                                </div>
-                            </div>
                         </CardHeader>
+                        <ProductsPage />
                     </Card>
                     <Card className={cn('w-[500px] mb-5')}>
                         <CardHeader>
@@ -247,10 +229,10 @@ export default function Payment() {
                             </TabsList>
                             <TabsContent value="account">
                                 <Card>
-                                    <CardHeader>
-                                        <CardTitle>배송지 선택</CardTitle>
-                                    </CardHeader>
-                                    <RadioGroup className="flex justify-start items-start" defaultValue="option-one">
+                                    <RadioGroup
+                                        className="flex justify-start items-start pt-6"
+                                        defaultValue="option-one"
+                                    >
                                         <div className="colum">
                                             <div className="pl-11">
                                                 <CardDescription className="flex items-center space-x-2">
@@ -325,10 +307,7 @@ export default function Payment() {
                             </TabsContent>
                             <TabsContent value="password">
                                 <Card>
-                                    <CardHeader>
-                                        <CardTitle>신규입력</CardTitle>
-                                    </CardHeader>
-                                    <CardDescription className="flex items-center space-x-2 pl-6 pb-4">
+                                    <CardDescription className="flex items-center space-x-2 pl-6 pb-4 pt-8">
                                         <Checkbox id="terms" />
                                         <label
                                             htmlFor="terms"
@@ -491,18 +470,18 @@ export default function Payment() {
                             </TabsList>
                             <TabsContent value="account">
                                 <Card>
-                                    <CardHeader>
-                                        <CardTitle>쿠폰</CardTitle>
-                                    </CardHeader>
-                                    <RadioGroup className="flex justify-start items-start" defaultValue="option-one">
+                                    <RadioGroup
+                                        className="flex justify-start items-start pt-6"
+                                        defaultValue="option-one"
+                                    >
                                         <div className="colum">
                                             <div className="pl-11">
                                                 <CardDescription className="flex items-center space-x-2">
                                                     <RadioGroupItem value="option-one" id="option-one" />
                                                     <Label className="font-bold" htmlFor="option-one">
-                                                        5,000원
+                                                        {coupon.price}
                                                     </Label>
-                                                    <Badge variant="secondary">신규</Badge>
+                                                    <Badge variant="secondary">{coupon.title}</Badge>
                                                 </CardDescription>
                                                 <CardDescription className="ml-7">
                                                     회원가입을 축하드립니다!
@@ -531,10 +510,7 @@ export default function Payment() {
                             </TabsContent>
                             <TabsContent value="password">
                                 <Card>
-                                    <CardHeader>
-                                        <CardTitle>포인트</CardTitle>
-                                    </CardHeader>
-                                    <CardDescription className="flex items-center space-x-2 pl-6 pb-4">
+                                    <CardDescription className="flex items-center space-x-2 pl-6 pb-4 pt-6">
                                         <Checkbox id="terms" />
                                         <label
                                             htmlFor="terms"
@@ -590,11 +566,11 @@ export default function Payment() {
                         <CardHeader>
                             <div className="flex justify-between items-start">
                                 <CardDescription>상품가격</CardDescription>
-                                <CardDescription className="font-bold">18,000원</CardDescription>
+                                <CardDescription className="font-bold">{product.price}</CardDescription>
                             </div>
                             <div className="flex justify-between items-start">
                                 <CardDescription>쿠폰 할인</CardDescription>
-                                <CardDescription className="font-bold">-1,000원</CardDescription>
+                                <CardDescription className="font-bold">-{coupon.price}</CardDescription>
                             </div>
                             <div className="flex justify-between items-start">
                                 <CardDescription>포인트 사용</CardDescription>
@@ -607,7 +583,7 @@ export default function Payment() {
                             <BlankLine />
                             <div className="flex justify-between items-start">
                                 <CardDescription>총 결제금액</CardDescription>
-                                <CardDescription className="font-bold">19,500원</CardDescription>
+                                <CardDescription className="font-bold">{product.price}-{coupon.price}</CardDescription>
                             </div>
                             <br />
                             <div className="flex justify-start items-start">
@@ -615,25 +591,6 @@ export default function Payment() {
                                 <CardDescription className="font-bold">포인트 적립예정</CardDescription>
                             </div>
                         </CardHeader>
-                        <div>
-                            <Table>
-                                <TableBody>
-                                    {invoices.map((invoice) => (
-                                        <TableRow key={invoice.invoice}>
-                                            <TableCell className="font-medium">{invoice.invoice}</TableCell>
-                                            <TableCell></TableCell>
-                                            <TableCell></TableCell>
-                                            <TableCell className="text-right">{invoice.totalAmount}</TableCell>
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                                <TableRow className="" />
-                                <TableRow>
-                                    <TableCell colSpan={3}>총 결제금액</TableCell>
-                                    <TableCell className="text-right">19,000원</TableCell>
-                                </TableRow>
-                            </Table>
-                        </div>
                     </Card>
                     <Card className={cn('w-[500px] mb-5 mt-5')}>
                         <CardHeader>
