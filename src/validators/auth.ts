@@ -39,4 +39,21 @@ export const registerSchema = z.object({
       (value) => passwordRegex.test(value), // 사용자 정의 조건을 설정하여 비밀번호 확인의 유효성을 검사합니다.
       "The password must be at least 6 characters long and contain letters, numbers, and special characters.",  // 유효성 검사 실패 시 표시할 메시지입니다.
     ),
+  contacts: z
+    .string()
+    .min(11, "Contact information must be 11 digits long.")
+    .max(11, "Contact information must be 11 digits long.")
+    .refine(
+      (value) => phoneRegex.test(value), // 사용자 정의 조건을 설정하여 휴대전화 번호의 유효성을 검사합니다.
+      "Please enter an 11-digit number starting with 010",  // 유효성 검사 실패 시 표시할 메시지입니다.
+    ),
+  name: z
+    .string()
+    .min(2, { message: "The name must be at least 2 characters." })
+    .max(25, { message: "The name must be less than 25 characters." }),
+  address: z
+    .string()
+    .min(6, "Password must be at least 6 characters long.")
+    .max(100, "Password must be less than 100 characters."),
 });
+

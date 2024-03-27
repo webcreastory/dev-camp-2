@@ -17,11 +17,11 @@ interface ProductData {
 // 제품 목록
 const products: ProductData[] = [
     {
-        img: "/payment-image.jpg",
-        condition: "Best",
-        title: "Daily Facial Soap",
-        content: "용량 80ml - 1개",
-        price: "7,000원"
+        img: '/payment-image.jpg',
+        condition: 'Best',
+        title: 'Daily Facial Soap',
+        content: '용량 80ml - 1개',
+        price: '37,000원',
     },
     // {
     //     img: "/payment-image.jpg",
@@ -43,18 +43,16 @@ const products: ProductData[] = [
 const ProductComponent = ({ product }: { product: ProductData }) => (
     <Card className={cn('w-[480px] ml-2 mb-5')}>
         <CardHeader>
-        <Checkbox id="terms2" />
             <div className="flex w-full justify-start">
                 <Image
                     src={product.img}
                     alt="payment image"
-                    className="dark:invert mt-3"
+                    className="dark:invert"
                     width={100}
                     height={100}
                     priority
                 />
-                
-                <div className="pl-3 mt-3">
+                <div className="pl-3">
                     <Badge className="mb-1" variant="destructive">
                         {product.condition}
                     </Badge>
