@@ -21,6 +21,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { useToast } from '@/components/ui/use-toast'; // useToast 훅을 가져옵니다.
 import { Input } from '@/components/ui/input'; // Input 컴포넌트를 가져옵니다.
 import { cn } from '@/lib/utils'; // cn 유틸리티 함수를 가져옵니다.
@@ -81,23 +82,31 @@ export default function Payment() {
     };
 
     const product = {
-        img: '/payment-image.jpg',
-        condition: '필수',
-        title: 'Daily Facial Soap',
-        content: '용량 80ml - 1개',
-        price: '37,000원',
+        img: '/iyou.png',
+        condition: 'BEST',
+        title: '[아이유 PICK] JESTINA 귀걸이',
+        content: '브랜드/품번 JESTINA/JJMBEQ2BF547SW000',
+        price: '108,000원',
     };
 
     // Mock 데이터 형태 정의
     interface CouponData {
-        price1: string;
-        price2: string;
+        price: string;
     }
 
     // Mock 데이터
     const coupon: CouponData = {
-        price1: '5,000원',
-        price2: '10,000원',
+        price: '5,000원',
+    };
+
+    // Mock 데이터 형태 정의
+    interface pointData {
+        price: string;
+    }
+
+    // Mock 데이터
+    const point: pointData = {
+        price: '2,300원',
     };
 
     const handleDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -108,6 +117,21 @@ export default function Payment() {
                 parentDiv.remove();
             }
         }
+    };
+
+    const [inputValue, setInputValue] = useState<string>('');
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value.replace(/\D/g, ''); // 숫자 이외의 문자 제거
+        if (value === '' || (parseInt(value) >= 0 && parseInt(value) <= 2300)) {
+            setInputValue(value.replace(/\B(?=(\d{3})+(?!\d))/g, ',')); // 세 자리마다 콤마 추가
+        }
+    };
+
+    const [showInput, setShowInput] = useState<boolean>(false);
+
+    const handleSelectChange = (value: string) => {
+        setShowInput(value === '직접입력');
     };
 
     return (
@@ -140,8 +164,46 @@ export default function Payment() {
                         <CardHeader>
                             <CardTitle>주문 상품 정보</CardTitle>
                         </CardHeader>
-                        <ProductsPage />
+                        <Sheet>
+                            <SheetTrigger>
+                                <ProductsPage />
+                            </SheetTrigger>
+                            <SheetContent>
+                                <SheetHeader>
+                                    <SheetTitle className="mb-5">[아이유 PICK] JESTINA 귀걸이</SheetTitle>
+                                    <SheetDescription>
+                                        <Badge className="mb-1 font-bold" variant="destructive">
+                                            BEST
+                                        </Badge>
+                                    </SheetDescription>
+                                    <Image
+                                        src="/iyou.png"
+                                        alt="payment image"
+                                        className="dark:invert"
+                                        width={300}
+                                        height={400}
+                                        priority
+                                    />
+                                    <SheetTitle className="mb-5">Product Info</SheetTitle>
+                                    <SheetDescription className="font-bold">주얼리/귀걸이(제이에스티나 아이유 귀걸이)</SheetDescription>
+                                    <SheetDescription className="font-bold">프리미엄/스톤 스몰럭셔리 컨셉의 화이트몬드</SheetDescription>
+                                    <SheetDescription className="font-bold">
+                                        브랜드/품번 JESTINA/JJMBEQ2BF547SW000
+                                    </SheetDescription>
+                                    <SheetDescription className="font-bold">현재가/가격 108,000원</SheetDescription>
+                                    <Image
+                                        src="/iyou-info.png"
+                                        alt="payment image"
+                                        className="dark:invert"
+                                        width={300}
+                                        height={400}
+                                        priority
+                                    />
+                                </SheetHeader>
+                            </SheetContent>
+                        </Sheet>
                     </Card>
+
                     <Card className={cn('w-[500px] mb-5')}>
                         <CardHeader>
                             <CardTitle>주문자 정보</CardTitle>
@@ -164,7 +226,7 @@ export default function Payment() {
                                                     <FormControl>
                                                         <Input
                                                             type="text"
-                                                            className="border-none w-full pl-2 pb-2 font-medium text-base text-black rounded-lg focus:outline-none"
+                                                            className="border-none w-full pl-2 pb-2 text-sm font-normal text-black rounded-lg focus:outline-none"
                                                             {...field}
                                                         />
                                                     </FormControl>
@@ -185,7 +247,7 @@ export default function Payment() {
                                                     <FormControl>
                                                         <Input
                                                             type="text"
-                                                            className="border-none w-full pl-2 pb-2 font-medium text-base text-black rounded-lg focus:outline-none"
+                                                            className="border-none w-full pl-2 pb-2 text-sm font-normal text-black rounded-lg focus:outline-none"
                                                             {...field}
                                                         />
                                                     </FormControl>
@@ -206,7 +268,7 @@ export default function Payment() {
                                                     <FormControl>
                                                         <Input
                                                             type="text"
-                                                            className="border-none w-full pl-2 pb-2 font-medium text-base text-black rounded-lg focus:outline-none"
+                                                            className="border-none w-full pl-2 pb-2 text-sm font-normal text-black rounded-lg focus:outline-none"
                                                             {...field}
                                                         />
                                                     </FormControl>
@@ -315,7 +377,7 @@ export default function Payment() {
                                         <Checkbox id="terms" />
                                         <label
                                             htmlFor="terms"
-                                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                            className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                                         >
                                             주문자 정보와 동일
                                         </label>
@@ -338,7 +400,7 @@ export default function Payment() {
                                                                 <FormControl>
                                                                     <Input
                                                                         type="text"
-                                                                        className="border-none w-full pl-2 pb-2 font-medium text-base text-black rounded-lg focus:outline-none"
+                                                                        className="border-none w-full pl-2 pb-2 text-sm font-normal text-black rounded-lg focus:outline-none"
                                                                         {...field}
                                                                     />
                                                                 </FormControl>
@@ -359,7 +421,7 @@ export default function Payment() {
                                                                 <FormControl>
                                                                     <Input
                                                                         type="text"
-                                                                        className="border-none w-full pl-2 pb-2 font-medium text-base text-black rounded-lg focus:outline-none"
+                                                                        className="border-none w-full pl-2 pb-2 text-sm font-normal text-black rounded-lg focus:outline-none"
                                                                         {...field}
                                                                     />
                                                                 </FormControl>
@@ -380,7 +442,7 @@ export default function Payment() {
                                                                 <FormControl>
                                                                     <Input
                                                                         type="text"
-                                                                        className="border-none w-full pl-2 pb-2 font-medium text-base text-black rounded-lg focus:outline-none"
+                                                                        className="border-none w-full pl-2 pb-2 text-sm font-normal text-black rounded-lg focus:outline-none"
                                                                         {...field}
                                                                     />
                                                                 </FormControl>
@@ -408,7 +470,13 @@ export default function Payment() {
                                         render={({ field }) => (
                                             <FormItem>
                                                 <CardDescription className="font-bold">배송 메모</CardDescription>
-                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                <Select
+                                                    onValueChange={(value) => {
+                                                        field.onChange(value);
+                                                        handleSelectChange(value);
+                                                    }}
+                                                    defaultValue={field.value}
+                                                >
                                                     <FormControl>
                                                         <SelectTrigger>
                                                             <SelectValue placeholder="배송 메모를 선택해 주세요." />
@@ -424,20 +492,22 @@ export default function Payment() {
                                                         <SelectItem value="select3">
                                                             부재시 전화나 문자를 남겨주세요.
                                                         </SelectItem>
-                                                        <SelectItem value="select4">직접입력</SelectItem>
+                                                        <SelectItem value="직접입력">직접입력</SelectItem>
                                                     </SelectContent>
+                                                </Select>
+                                                {showInput && (
                                                     <FormItem>
                                                         <label className="w-full max-w-full flex flex-col justify-center items-start rounded-lg border border-gray-300 mb-0 transition duration-300 hover:border-gray-500">
                                                             <FormControl>
                                                                 <Input
                                                                     type="text"
-                                                                    className="border-none w-full pl-3 pb-2 font-medium text-base text-black rounded-lg focus:outline-none placeholder:text-sm"
+                                                                    className="border-none w-full pl-3 pb-2 text-sm font-normal text-black rounded-lg focus:outline-none placeholder:text-sm"
                                                                     placeholder="배송 메모를 입력해주세요"
                                                                 />
                                                             </FormControl>
                                                         </label>
                                                     </FormItem>
-                                                </Select>
+                                                )}
                                             </FormItem>
                                         )}
                                     />
@@ -465,14 +535,19 @@ export default function Payment() {
                                                 <div className="flex items-center space-x-2">
                                                     <RadioGroupItem value="option-one" id="option-one" />
                                                     <Label className="font-bold" htmlFor="option-one">
-                                                        {coupon.price1}
+                                                        {coupon.price}
                                                     </Label>
-                                                    <Badge variant="secondary">신규</Badge>
+                                                    <Badge variant="destructive">NEW</Badge>
                                                 </div>
-                                                <CardDescription className="ml-7">
-                                                    회원가입을 축하드립니다!
-                                                    <br />
-                                                    모든 상품에 적용 가능합니다.
+                                                <CardDescription className="ml-5">
+                                                    <Image
+                                                        src="/coupon.png"
+                                                        alt="image"
+                                                        className="dark:invert"
+                                                        width={300}
+                                                        height={400}
+                                                        priority
+                                                    />
                                                 </CardDescription>
                                             </div>
                                             <br />
@@ -480,15 +555,9 @@ export default function Payment() {
                                                 <div className="flex items-center space-x-2">
                                                     <RadioGroupItem value="option-two" id="option-two" />
                                                     <Label className="font-bold" htmlFor="option-two">
-                                                    {coupon.price2}
+                                                        사용하지 않음
                                                     </Label>
-                                                    <Badge variant="secondary">10만원 이상 구매시</Badge>
                                                 </div>
-                                                <CardDescription className="ml-7">
-                                                    10만원 이상 구매시
-                                                    <br />
-                                                    1만원 쿠폰 적용 가능합니다.
-                                                </CardDescription>
                                             </div>
                                         </div>
                                     </RadioGroup>
@@ -500,7 +569,7 @@ export default function Payment() {
                                         <Checkbox id="terms" />
                                         <label
                                             htmlFor="terms"
-                                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                            className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                                         >
                                             보유 포인트 전액 사용
                                         </label>
@@ -516,8 +585,10 @@ export default function Payment() {
                                                         <FormControl>
                                                             <Input
                                                                 type="text"
-                                                                className="border-none w-full pl-3 pb-2 font-medium text-base text-black rounded-lg focus:outline-none"
-                                                                placeholder=""
+                                                                className="border-none w-full pl-3 pb-2 text-sm font-normal text-black rounded-lg focus:outline-none placeholder:text-sm"
+                                                                placeholder="보유 포인트 금액 이상은 입력되지 않습니다"
+                                                                value={inputValue}
+                                                                onChange={handleInputChange}
                                                             />
                                                         </FormControl>
                                                     </label>
@@ -549,11 +620,11 @@ export default function Payment() {
                             </div>
                             <div className="flex justify-between items-start">
                                 <CardDescription>쿠폰 할인</CardDescription>
-                                <CardDescription className="font-bold">-{coupon.price1} || -{coupon.price2} </CardDescription>
+                                <CardDescription className="font-bold">-{coupon.price}</CardDescription>
                             </div>
                             <div className="flex justify-between items-start">
                                 <CardDescription>포인트 사용</CardDescription>
-                                <CardDescription className="font-bold">0원</CardDescription>
+                                <CardDescription className="font-bold">{point.price}</CardDescription>
                             </div>
                             <div className="flex justify-between items-start">
                                 <CardDescription>배송비</CardDescription>
@@ -563,7 +634,7 @@ export default function Payment() {
                             <div className="flex justify-between items-start">
                                 <CardDescription>총 결제금액</CardDescription>
                                 <CardDescription className="font-bold">
-                                    {product.price}-{coupon.price1}
+                                    {product.price}-{coupon.price}
                                 </CardDescription>
                             </div>
                             <br />
@@ -642,7 +713,7 @@ export default function Payment() {
                                                             <FormControl>
                                                                 <Input
                                                                     type="text"
-                                                                    className="border-none w-full pl-3 pb-2 font-medium text-base text-black rounded-lg focus:outline-none placeholder:text-sm"
+                                                                    className="border-none w-full pl-3 pb-2 text-sm font-normal text-black rounded-lg focus:outline-none placeholder:text-sm"
                                                                     placeholder="입금자명 (미입력시 주문자명)"
                                                                 />
                                                             </FormControl>
@@ -656,7 +727,7 @@ export default function Payment() {
                                                         <Checkbox id="terms1" />
                                                         <label
                                                             htmlFor="terms1"
-                                                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                                            className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                                                         >
                                                             현금영수증 신청
                                                         </label>
@@ -675,7 +746,7 @@ export default function Payment() {
                                 <Checkbox id="terms2" />
                                 <label
                                     htmlFor="terms2"
-                                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                    className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                                 >
                                     전체동의
                                 </label>
@@ -684,27 +755,18 @@ export default function Payment() {
                                 <Checkbox id="terms3" />
                                 <label
                                     htmlFor="terms3"
-                                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                    className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                                 >
                                     구매조건 확인 및 결제진행 동의 [필수]
-                                </label>
-                            </CardDescription>
-                            <CardDescription className="flex items-center space-x-2 pl-6 pb-4">
-                                <Checkbox id="terms4" />
-                                <label
-                                    htmlFor="terms4"
-                                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                                >
-                                    구매조건 확인 및 결제진행에 동의 [필수]
                                 </label>
                             </CardDescription>
                             <CardDescription className="flex items-center space-x-2 pl-6 pb-4">
                                 <Checkbox id="terms5" />
                                 <label
                                     htmlFor="terms5"
-                                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                    className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                                 >
-                                    구매조건 확인 및 결제진행에 동의 [선택]
+                                    개인정보 수집 및 이용안내 동의 [선택]
                                 </label>
                             </CardDescription>
                             <Dialog>
@@ -717,41 +779,42 @@ export default function Payment() {
                                         <DialogDescription>
                                             <div>
                                                 <div>
-                                                <br />
-                                                    <p className='font-bold'>개인정보 처리방침</p><br />
+                                                    <br />
+                                                    <p className="font-bold">개인정보 처리방침</p>
+                                                    <br />
                                                 </div>
                                                 <div>
                                                     <p>
                                                         「개인정보 처리방침」이란 이용자의 소중한 개인정보를 보호하여
-                                                        안심하고 서비스를 이용할 수 있도록 우리 회사가 서비스를
-                                                        운영함에 있어 준수해야 할 지침을 의미합니다.
-                                                    </p><br />
-                                                    <p className='font-bold'>
-                                                        제 1조 개인정보 수집범위 및 방법
-                                                    </p><br />
+                                                        안심하고 서비스를 이용할 수 있도록 우리 회사가 서비스를 운영함에
+                                                        있어 준수해야 할 지침을 의미합니다.
+                                                    </p>
+                                                    <br />
+                                                    <p className="font-bold">제 1조 개인정보 수집범위 및 방법</p>
+                                                    <br />
                                                     <p>
                                                         회원가입 및 로그인 시점에 우리 회사는 이용자로부터 아래와 같은
                                                         개인정보를 수집합니다.
-                                                    </p><br />
-                                                    <p className='font-bold'>
-                                                        제 2조 개인정보 처리 및 보유
-                                                    </p><br />
+                                                    </p>
+                                                    <br />
+                                                    <p className="font-bold">제 2조 개인정보 처리 및 보유</p>
+                                                    <br />
                                                     <p>
-                                                    우리 회사는 이용자의 개인정보를 다음과 같은 목적으로만
+                                                        우리 회사는 이용자의 개인정보를 다음과 같은 목적으로만
                                                         처리합니다.
-                                                    </p><br />
-                                                    <p className='font-bold'> 
-                                                        제 3조 개인정보 파기
-                                                    </p><br />
+                                                    </p>
+                                                    <br />
+                                                    <p className="font-bold">제 3조 개인정보 파기</p>
+                                                    <br />
                                                     <p>
                                                         우리 회사는 이용자의 개인정보에 대해 처리목적이 달성되어
                                                         불필요하게 되었을 때는 해당 개인정보를 지체 없이 파기합니다.
-                                                        <br /><br />
+                                                        <br />
+                                                        <br />
                                                         전자적 파일 형태인 경우 복구 및 재생되지 않도록 기술적인 방법을
                                                         이용하여 완전하게 삭제하고, 그 밖에 기록물, 인쇄물, 서면 등의
                                                         경우 분쇄하거나 소각하여 파기합니다.
                                                     </p>
-                                                
                                                 </div>
                                             </div>
                                         </DialogDescription>
