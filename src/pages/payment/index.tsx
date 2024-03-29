@@ -634,7 +634,7 @@ export default function Payment() {
                             </div>
                             <div className="flex justify-between items-start">
                                 <CardDescription>포인트 사용</CardDescription>
-                                <CardDescription className="font-bold">{point.price}</CardDescription>
+                                <CardDescription className="font-bold">-{point.price}</CardDescription>
                             </div>
                             <div className="flex justify-between items-start">
                                 <CardDescription>배송비</CardDescription>
@@ -643,9 +643,7 @@ export default function Payment() {
                             <BlankLine />
                             <div className="flex justify-between items-start">
                                 <CardDescription>총 결제금액</CardDescription>
-                                <CardDescription className="font-bold">
-                                    {product.price}-{coupon.price}
-                                </CardDescription>
+                                <CardDescription className="font-bold">102,700원</CardDescription>
                             </div>
                             <br />
                             <div className="flex justify-start items-start">
