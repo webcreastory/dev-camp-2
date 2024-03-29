@@ -31,8 +31,9 @@
 
 ## PAYMENT
 
-![payment-white](https://github.com/webcreastory/dev-camp-2/assets/137463073/6a44ab97-a3e4-4ef9-aa8b-dc910cd1cc1a)
-![payment-black](https://github.com/webcreastory/dev-camp-2/assets/137463073/9e09918e-3502-417e-b20f-203f74983c22)
+![payment-w](https://github.com/webcreastory/dev-camp-2/assets/137463073/63d10225-9c13-4d33-9a2b-539ce21bcbba)
+![payment-black](https://github.com/webcreastory/dev-camp-2/assets/137463073/b01144ba-9297-4996-9ed5-7b111b9b2e62)
+![sheet](https://github.com/webcreastory/dev-camp-2/assets/137463073/f3472288-a84f-4c62-b853-6d5d8931f43b)
 
 ### Main Function
 
@@ -44,8 +45,9 @@
 -   `약관보기`: 약관보기 기능을 모달창으로 띄워줍니다.
 -   `전체/선택동의`: 전체 동의 혹은 선택적으로 동의할 수 있도록 체크박스를 활성화합니다.
 -   `결제 버튼 활성화`: 모든 조건이 충족되었을 때 결제 버튼이 활성화되며 조건 불충족시 alert로 충족 조건을 알립니다.
--   `PG사 연결하기`: Payment 개발자센터를 이용해 결제 기능을 연동합니다.
+-   `PG사 연결하기`: toss Payment 개발자센터를 이용해 결제 기능을 연동합니다.
 -   `Check-Box`: shadcn/ui로 check-box 기능을 간편하게 구현할 수 있습니다.
+-   `Right-Sheet`: shadcn/ui로 sheet 기능으로 상품 정보를 자세히 살펴볼 수 있습니다.
 -   `Select`: shadcn/ui로 select 기능을 간편하게 구현할 수 있습니다.
 -   `페이지 이동`: useRouter를 사용하여 다른 페이지로 간편하게 이동할 수 있습니다.
 -   `다른 웹페이지 이동`: <a> 태그를 사용해 하이퍼링크를 생성하여 다른 페이지로 간편하게 이동할 수 있습니다.

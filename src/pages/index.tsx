@@ -19,7 +19,7 @@ export default function Home() {
     };
 
     const handlePreviousProject = () => {
-        window.open('https://www.giftipie.me/', '_blank');
+        window.open('https://github.com/Gift-For-You-Project/gift-for-you-FE', '_blank');
     };
 
     return (
